@@ -3,20 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Algorithm visualizer | Supratik Basu</title>
+    <title>Algorithm visualizer | Aditya Prakash</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         body {
             padding: 32px 64px;
             color: #2f363f;
-            background-color: rgba(249,250,252, 0.5);;
+            background-color: rgba(249,250,252, 0.5);
+            overflow: hidden;
         }
         .bar {
-            width: 5px;
+            width: 25px;
             display: inline-block;
-            margin: 0 1px;
+            margin: 0 3px;
             background-color: blue;
             transition: height 100ms ease-in;
+            border-radius: 3px 3px;
         }
 
         h1, h3 {
@@ -109,9 +111,8 @@
             margin-top: 64px;
             min-height: 600px;
             padding: 32px;
+            background-color: black;
         }
-
-        /* CSS of toast reference: https://codepen.io/kipp0/pen/pPNrrj */
         #toast {
             visibility: hidden;
             max-width: 50px;
@@ -134,57 +135,41 @@
         #toast #toast-img{
             width: 50px;
             height: 50px;
-            
             float: left;
-            
             padding-top: 16px;
             padding-bottom: 16px;
-            
             box-sizing: border-box;
-
-            
             background-color: #111;
             color: #fff;
         }
-
         #toast-img{
             display: flex;
             justify-content: center;
             align-items: center;
         }
-
         #toast #toast-desc{
-
-            
             color: #fff;
-        
             padding: 16px;
-            
             overflow: hidden;
             white-space: nowrap;
         }
-
         #toast.show {
             visibility: visible;
             -webkit-animation: fadein 0.5s, expand 0.5s 0.5s,stay 3s 1s, shrink 0.5s 2s, fadeout 0.5s 2.5s;
             animation: fadein 0.5s, expand 0.5s 0.5s,stay 3s 1s, shrink 0.5s 4s, fadeout 0.5s 4.5s;
         }
-
         @-webkit-keyframes fadein {
             from {bottom: 0; opacity: 0;} 
             to {bottom: 30px; opacity: 1;}
         }
-
         @keyframes fadein {
             from {bottom: 0; opacity: 0;}
             to {bottom: 30px; opacity: 1;}
         }
-
         @-webkit-keyframes expand {
             from {min-width: 50px} 
             to {min-width: 350px}
         }
-
         @keyframes expand {
             from {min-width: 50px}
             to {min-width: 350px}
@@ -193,7 +178,6 @@
             from {min-width: 350px} 
             to {min-width: 350px}
         }
-
         @keyframes stay {
             from {min-width: 350px}
             to {min-width: 350px}
@@ -202,29 +186,28 @@
             from {min-width: 350px;} 
             to {min-width: 50px;}
         }
-
         @keyframes shrink {
             from {min-width: 350px;} 
             to {min-width: 50px;}
         }
-
         @-webkit-keyframes fadeout {
             from {bottom: 30px; opacity: 1;} 
             to {bottom: 60px; opacity: 0;}
         }
-
         @keyframes fadeout {
             from {bottom: 30px; opacity: 1;}
             to {bottom: 60px; opacity: 0;}
         }
-
         /* ***************************** */
-
-
+        .git{
+            text-decoration: underline;
+            color: #2f363f;
+            font-size: 18px;
+        }
     </style>
 </head>
 <body>
-    <h1>Algorithm visualizer</h1>
+    <h1>Algorithm visualizer <span class="git"><a href="https://github.com/prakashaditya13/Algorithm-Visualizer">GitHub</a></span> </h1>
     <h3>Linear Search, Binary Search, Bubble Sort, Selection Sort</h3>
     <div class="controls">
         <input type="number" id="dataset-size" class="ipt" placeholder="Dataset size (min 5)" onblur="handleDatasetSizeChange()"/>
@@ -251,22 +234,16 @@
         const COMPARE_COLOR = 'yellow'
         const FOUND_COLOR = 'green'
         const SELECT_COLOR = 'red'
-
-
         // utils
         function getRandomNumber(min, max) {
             return Math.floor(Math.random() * (max - min + 1)) + min
         }
-
         function sleep(ms) {
             return new Promise(resolve => setTimeout(resolve, ms));
         }
-
     </script>
-
     <script>
         // Algorithms for animations
-
         function getLinearSearchAnimations(searchNumber, array) {
             let animationArr = []
             for (let i = 0; i < array.length; ++i) {
@@ -275,7 +252,6 @@
                         pos: i,
                         found: true,
                     })
-
                     return animationArr
                 } else {
                     animationArr.push({
@@ -287,13 +263,10 @@
                 pos: array.length - 1,
                 found: false
             })
-
             return animationArr
         }
-
         function getBinarySearchAnimations(searchNumber, sortedArray) {
             let animationArr =  []
-
             let lowIndex = 0
             let highIndex = sortedArray.length - 1
             let midIndex
@@ -338,7 +311,6 @@
             })
             return animationArr;
         }
-
         function getBubbleSortAnimations(inputArr) {
             let animationArr = []
             let len = inputArr.length;
@@ -366,7 +338,6 @@
             } while (swapped);
             return animationArr;
         }
-
         function getSelectionSortAnimations(inputArr) {
             let animationArr = []
             let len = inputArr.length;
@@ -390,7 +361,6 @@
                         min = j
                     }
                 }
-
                 if (min !== i) {
                     animationArr.push({
                         min,
@@ -404,12 +374,9 @@
             }
             return animationArr
         }
-
     </script>
-
     <script>
         // Project utitlity functions
-
         function setInactiveInteractions(active) {
             document.getElementById('dataset-size').disabled = active
             document.getElementById('search-number').disabled = active
@@ -419,56 +386,45 @@
             document.getElementById('bubble-sort').disabled = active
             document.getElementById('selection-sort').disabled = active
         }
-
         function enableInteractions() {
             setInactiveInteractions(false)
         }
-
         function disableInteractions() {
             setInactiveInteractions(true)
         }
-
         function toast(type, desc) {
             let toast = document.getElementById("toast")
             let toastDesc = document.getElementById("toast-desc")
-            let toastIcon = document.getElementById("toast-icon")
-            
+            let toastIcon = document.getElementById("toast-icon")   
             toast.className = "show";
             toastDesc.innerText = desc
             toastIcon.className = type === 'success' ? 'fa fa-2x fa-check-circle' : 'fa fa-2x fa-exclamation-circle'
             toastIcon.style.color = type === 'success' ? '#d0f0c0' : '#e32636'
-
             setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 5000);
         }
     </script>
-
     <script>
         let datasetSize, searchNumber, array = [];
-
         function handleDatasetSizeChange() {
-
             datasetSize = Number(document.getElementById('dataset-size').value)
             if (!datasetSize || datasetSize < 5) {
-                toast('fail', 'Dataset size must be minimum 5')
+                toast('Fail', 'Dataset size must be minimum 5')
                 document.getElementById('dataset-size').focus()
                 datasetSize = null
                 return
             }
         }
-
         function handleSearchNumberChange() {
             searchNumber = Number(document.getElementById('search-number').value) >= 5 ? Number(document.getElementById('search-number').value) : 5
             document.getElementById('search-number').value = searchNumber
         }
-
         function generateArray() {
             if (!datasetSize || datasetSize < 5) {
-                toast('fail', 'Input dataset size must be minimum 5')
+                toast('Fail', 'Input dataset size must be minimum 5')
                 document.getElementById('dataset-size').focus()
                 return
             }
             let lineContainerElement = document.getElementById('lines-container')
-
             // Remove Present Children
             let child = lineContainerElement.lastElementChild;  
             while (child) { 
@@ -476,45 +432,40 @@
                 child = lineContainerElement.lastElementChild; 
             }
             array = []
-
             // Add new Children
             for (let i = 0; i < datasetSize; ++i) {
-                let randomNumber = getRandomNumber(5, 500)
+                let randomNumber = getRandomNumber(5, 100)
                 array.push(randomNumber)
-
                 let lineElement = document.createElement('div')
                 lineElement.className = "bar"
                 lineElement.style.height = randomNumber + 'px'
+                lineElement.innerText = randomNumber
+                lineElement.style.color = "#fff"
+                lineElement.style.textAlign = "center"
                 lineContainerElement.appendChild(lineElement)
             }
         }
-
         async function doLinearSearch() {
             if (!searchNumber) {
                 toast('fail', 'Enter search number >= 5!')
                 document.getElementById('search-number').focus()
                 return
             }
-
             if (!array.length) {
                 toast('fail', 'Generate Array')
                 document.getElementById('generate-array').focus()
                 return
             }
-
             disableInteractions()
-
             let animationArr = getLinearSearchAnimations(searchNumber, [...array])
             let lineContainerChildElements = Array.from(document.getElementById('lines-container').children)
             let previous
             for (let i = 0; i < animationArr.length; ++i) {
                 let animation = animationArr[i]
-                await sleep(100)
-                
+                await sleep(300)                
                 if (Number.isInteger(previous)) {
                     lineContainerChildElements[previous].style.backgroundColor = BG_COLOR
                 }
-
                 if (animation.found === true) {
                     lineContainerChildElements[animation.pos].style.backgroundColor = FOUND_COLOR
                     toast('success', 'Found on position: ' + animation.pos)
@@ -529,54 +480,45 @@
                     previous = animation.pos
                 }
             }
-
             enableInteractions()
         }
-
         async function doBinarySearch() {
             if (!searchNumber) {
                 toast('fail', 'Enter search number!')
                 document.getElementById('search-number').focus()
                 return
             }
-
             if (!array.length) {
                 toast('fail', 'Generate Array!')
                 document.getElementById('generate-array').focus()
                 return
             }
-
             disableInteractions()
-
             let lineContainerChildElements = Array.from(document.getElementById('lines-container').children).slice()
-            
             // Sort array and dom elements before performing binary search
             array.sort((a, b) => a - b)
             lineContainerChildElements.sort((a, b) => parseInt(a.style.height) - parseInt(b.style.height))
-
             let lineContainerElement = document.getElementById('lines-container')
-
             // Remove Present Children
             let child = lineContainerElement.lastElementChild;
             while (child) { 
                 lineContainerElement.removeChild(child); 
                 child = lineContainerElement.lastElementChild; 
             }
-
             // Append the sorted childs
             for (let i = 0; i < array.length; ++i) {
                 let lineElement = document.createElement('div')
                 lineElement.className = "bar"
                 lineElement.style.height = array[i] + 'px'
+                lineElement.innerText = array[i]
+                lineElement.style.color = "#fff"
+                lineElement.style.textAlign = "center"
                 lineContainerElement.appendChild(lineElement)
             }
-
             await sleep(1000)
-
             let animationArr = getBinarySearchAnimations(searchNumber, array)
             let previous
             lineContainerChildElements = Array.from(document.getElementById('lines-container').children)
-
             for (let i = 0; i < animationArr.length; ++i) {
                 const animation = animationArr[i]
                 await sleep(300)
@@ -588,7 +530,6 @@
                         lineContainerChildElements[previous.midIndex].style.backgroundColor = BG_COLOR
                     }
                 }
-
                 if (animation.status === 'found') {
                     lineContainerChildElements[animation.midIndex].style.backgroundColor = FOUND_COLOR
                     toast('success', 'Found at index: ' + animation.midIndex)
@@ -606,26 +547,20 @@
                 } else {
                     lineContainerChildElements[animation.midIndex].style.backgroundColor = SELECT_COLOR
                 }
-
                 previous = animation
             }
-
             enableInteractions()
-        }
-    
+        }    
         async function doBubbleSort() {
             if (!array.length) {
                 toast('fail', 'Generate Array!')
                 document.getElementById('generate-array').focus()
                 return
             }
-
             disableInteractions()
-
             let lineContainerChildElements = Array.from(document.getElementById('lines-container').children)
             let animationArr = getBubbleSortAnimations(array)
             let previous
-
             for (let i = 0; i < animationArr.length; ++i) {
                 await sleep(300)
                 if (previous) {
@@ -633,7 +568,6 @@
                     lineContainerChildElements[previous.posJ].style.backgroundColor = BG_COLOR
                 }
                 const animation = animationArr[i]
-
                 if (animation.status === 'compare') {
                     lineContainerChildElements[animation.posI].style.backgroundColor = COMPARE_COLOR
                     lineContainerChildElements[animation.posJ].style.backgroundColor = COMPARE_COLOR
@@ -642,35 +576,31 @@
                     lineContainerChildElements[animation.posJ].style.backgroundColor = SELECT_COLOR
                     await sleep(300)
                     const tempHeight = lineContainerChildElements[animation.posI].style.height
+                    const tempNum = lineContainerChildElements[animation.posI].innerText
                     lineContainerChildElements[animation.posI].style.height = lineContainerChildElements[animation.posJ].style.height
+                    lineContainerChildElements[animation.posI].innerText = lineContainerChildElements[animation.posJ].innerText
                     lineContainerChildElements[animation.posJ].style.height = tempHeight
+                    lineContainerChildElements[animation.posJ].innerText = tempNum
                 }
-
                 previous = animation
             }
-
             if (previous) {
                 lineContainerChildElements[previous.posI].style.backgroundColor = BG_COLOR
                 lineContainerChildElements[previous.posJ].style.backgroundColor = BG_COLOR
             }
-
             enableInteractions()
             toast('success', 'Finshed sorting!')
         }
-
         async function doSelectionSort() {
             if (!array.length) {
                 toast('fail', 'Generate Array!')
                 document.getElementById('generate-array').focus()
                 return
             }
-
             disableInteractions()
-
             let lineContainerChildElements = Array.from(document.getElementById('lines-container').children)
             let animationArr = getSelectionSortAnimations(array)
             let previous
-
             for (let i = 0; i < animationArr.length; ++i) {
                 await sleep(300)
                 if (previous) {
@@ -679,7 +609,6 @@
                     Number.isInteger(previous.i) && (lineContainerChildElements[previous.i].style.backgroundColor = BG_COLOR)
                 }
                 const animation = animationArr[i]
-
                 if (animation.status === 'compare') {
                     lineContainerChildElements[animation.min].style.backgroundColor = COMPARE_COLOR
                     lineContainerChildElements[animation.j].style.backgroundColor = COMPARE_COLOR
@@ -688,25 +617,24 @@
                     lineContainerChildElements[animation.i].style.backgroundColor = SELECT_COLOR
                     await sleep(300)
                     const tempHeight = lineContainerChildElements[animation.min].style.height
+                    const tempNum = lineContainerChildElements[animation.min].innerText //num
                     lineContainerChildElements[animation.min].style.height = lineContainerChildElements[animation.i].style.height
+                    lineContainerChildElements[animation.min].innerText = lineContainerChildElements[animation.i].innerText //num
                     lineContainerChildElements[animation.i].style.height = tempHeight
+                    lineContainerChildElements[animation.i].innerText = tempNum //num
                 } else {
                     lineContainerChildElements[animation.min].style.backgroundColor = FOUND_COLOR
                 }
-
                 previous = animation
             }
-
             if (previous) {
                 Number.isInteger(previous.min) && (lineContainerChildElements[previous.min].style.backgroundColor = BG_COLOR)
                 Number.isInteger(previous.j) && (lineContainerChildElements[previous.j].style.backgroundColor = BG_COLOR)
                 Number.isInteger(previous.i) && (lineContainerChildElements[previous.i].style.backgroundColor = BG_COLOR)
             }
-
             enableInteractions()
             toast('success', 'Finshed sorting!')
         }
-
     </script>
 </body>
 </html>
